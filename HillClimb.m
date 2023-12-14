@@ -2,6 +2,7 @@ function [x_best, f_best, best_hc] = HillClimb(f, x0,lower,upper, max_iters)
     figure  
     hold on 
     title("HC run")
+    
     x=0:10^-5:1;
     fx = f(x);
     plot(x,fx,'b');
@@ -23,5 +24,7 @@ function [x_best, f_best, best_hc] = HillClimb(f, x0,lower,upper, max_iters)
             plot(x_best,f_best,'*r');
         end
         best_hc = [best_hc, f_best];
+  
     end
+    
 end

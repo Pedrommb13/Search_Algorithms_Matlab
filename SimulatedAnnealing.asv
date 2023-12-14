@@ -18,41 +18,44 @@ function [x_best, f_best,best_sa,temp_sa] = SimulatedAnnealing(f, x0, max_iters,
     iter_values = [];
    % prob_values = [];
   
-  
-   %ciclo repetido 5 vezes
+num_repeats = 5;
+
+for repeat = 1:num_repeats
+    
     while it < max_iters
-        r = (rand() - 0.5)/20;
-        x_new = x_best + r; 
-            while x_new < lower || x_new > upper   
-                r = (rand() - 0.5)/20;
-                x_new = x_best + r;
-            end
+        r = (rand() - 0.5) / 20;
+        x_new = x_best + r;
+        while x_new < lower || x_new > upper
+            r = (rand() - 0.5) / 20;
+            x_new = x_best + r;
+        end
         f_new = f(x_new);
         delta_f = f_new - f_best;
-        probability = exp(-abs(delta_f )/ temperature);
+        probability = exp(-abs(delta_f) / temperature);
         if delta_f > 0
             x_best = x_new;
             f_best = f_new;
         else
-           
             if rand() < probability
                 x_best = x_new;
                 f_best = f_new;
             end
-          %  prob_values =[prob_values,probability]
         end
-        
+
         temperature = temperature * cooling_rate;
-        plot(x_best,f_best,'*r');
-        it = it + 1 ;
-        best_sa = [best_sa,f_best];
+        plot(x_best, f_best, '*r');
+        it = it + 1;
+        best_sa = [best_sa, f_best];
         temp_sa = [temp_sa, temperature];
-% Armazena valores de temperatura e iterações
+        
+        % Armazena valores de temperatura e iterações
         temp_values = [temp_values, temperature];
         iter_values = [iter_values, it];
-        
-            
     end
+    
+    
+    
+end
      % Gráfico da temperatura em função das iterações
     figure
     plot(iter_values, temp_values, 'g');

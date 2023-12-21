@@ -1,5 +1,6 @@
 function [x_best, f_best, best_hc] = HillClimb(f, x0,lower,upper, max_iters)
-    figure  
+   
+figure  
     hold on 
     title("HC run")
     

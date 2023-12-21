@@ -46,7 +46,13 @@ CHROME = round(rand(pop_size, lchrome));
 POP = [];   
 sumfit = 0;
 max = -Inf;
-
+ % Plot da Função e valor máximo
+ limits=[0,1]; % Limites da pesquisa 
+ set(0,'defaultlinelinewidth',2);
+ ezplot('4*(sin(5*pi*x+0.5)^6)*exp(log2((x-0.8)^2))',limits)
+ title('');
+ axis([0,1,-0.1,2]); % Delimitar os eixos
+ hold on
 [x_best_ga, f_best_ga] = GeneticAlgorithm (f,pop_size,lchrome,maxgen,p_cross, p_mut);
 % Print the results
 %disp("Genetic Algorithm:")

@@ -24,44 +24,49 @@ function [x_best, f_best,best_sa,temp_sa] = SimulatedAnnealing(f, x0, max_iters,
 
     % Executando o algoritmo 5 vezes
     for i = 1:5
-    fprintf('Run %d: Melhor solução x = %f com valor de função f(x) = %f\n', i, x_best, f_best);    
-    while it < max_iters
-        r = (rand() - 0.5)/20;
-        x_new = x_best + r; 
+        it = 0;
+        x_best = x0;
+        f_best = f(x0);
+        best_sa = f_best;
+        temp_sa = initial_temperature;
+        temperature = initial_temperature;
+        while it < max_iters
+            r = (rand() - 0.5)/20;
+            x_new = x_best + r; 
             while x_new < lower || x_new > upper   
                 r = (rand() - 0.5)/20;
                 x_new = x_best + r;
             end
-        f_new = f(x_new);
-        delta_f = f_new - f_best;
-        probability = exp(-abs(delta_f )/ temperature);
-        if delta_f > 0
-            x_best = x_new;
-            f_best = f_new;
-        else
-           
-            if rand() < probability
+            f_new = f(x_new);
+            delta_f = f_new - f_best;
+            probability = exp(-abs(delta_f )/ temperature);
+            if delta_f > 0
                 x_best = x_new;
                 f_best = f_new;
+            else
+                
+                if rand() < probability
+                    x_best = x_new;
+                    f_best = f_new;
+                end
+                
             end
-        
-        end
-        
-        temperature = temperature * cooling_rate;
-        plot(x_best,f_best,'*r');
-        it = it + 1 ;
-        best_sa = [best_sa,f_best];
-        temp_sa = [temp_sa, temperature];
-% Armazena valores de temperatura e iterações
-        temp_values = [temp_values, temperature];
-        iter_values = [iter_values, it];
-        
             
-    end
-        if f_best > best_overall_f
-            best_overall_f = f_best;
-            best_overall_x = x_best;
+            temperature = temperature * cooling_rate;
+            plot(x_best,f_best,'*r');
+            it = it + 1 ;
+            best_sa = [best_sa,f_best];
+            temp_sa = [temp_sa, temperature];
+            % Armazena valores de temperatura e iterações
+            temp_values = [temp_values, temperature];
+            iter_values = [iter_values, it];
+            
+            if f_best > best_overall_f
+                best_overall_f = f_best;
+                best_overall_x = x_best;
+            end
         end
+        fprintf('Run %d: Melhor solução x = %f com valor de função f(x) = %f\n', i, x_best, f_best);    
     end
 
     figure; 

@@ -27,7 +27,7 @@ function [best_fitness, best_solution] = GeneticAlgorithm(f, x0, max_iters, pop_
 
         % Update best solution and fitness
         for j = 1:pop_size
-            if fitness(j) < best_fitness
+            if fitness(j) > best_fitness
                 best_fitness = fitness(j);
                 best_solution = population(j, :);
             end

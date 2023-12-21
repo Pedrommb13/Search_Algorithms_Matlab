@@ -8,9 +8,7 @@ max_iters = 100;
 hc_data = [x_best, f_best, best_hc];
 figure
 plot(best_hc);
-title("HC values")
-
-            
+title("HC values")  
 
 %Simulated Annealing
 initial_temperature = 90;

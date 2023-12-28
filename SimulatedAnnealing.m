@@ -24,6 +24,7 @@ function [x_best, f_best,best_sa,temp_sa] = SimulatedAnnealing(f, x0, max_iters,
 
     % Executando o algoritmo 5 vezes
     for i = 1:5
+        
         it = 0;
         x_best = x0;
         f_best = f(x0);
@@ -49,7 +50,7 @@ function [x_best, f_best,best_sa,temp_sa] = SimulatedAnnealing(f, x0, max_iters,
                     x_best = x_new;
                     f_best = f_new;
                 end
-                
+                 figure; 
             end
             
             temperature = temperature * cooling_rate;
